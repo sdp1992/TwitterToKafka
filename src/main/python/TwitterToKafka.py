@@ -8,14 +8,14 @@ import datetime
 
 
 # Replace the values below with yours auth credentials
-ACCESS_TOKEN = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-ACCESS_SECRET = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-CONSUMER_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-CONSUMER_SECRET = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+ACCESS_TOKEN = '223106342-W71cOvvTyyTBTUwWgw4QBUybxDpysz20PUDVqDGB'
+ACCESS_SECRET = '91PRaEhHIUmRhPN8SYS68vtminEuMcNKPaN7bsPcz8GpX'
+CONSUMER_KEY = 'CuvYdTltOue5RFYc9oD17tkJq'
+CONSUMER_SECRET = 'HYHthuLPZtqiBoRbQfDHhW94GYTKTIKBtxKtaiSgAbS3SP1EK1'
 my_auth = requests_oauthlib.OAuth1(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
 
 # Kafka cluster details (single node cluster for dev)
-bootstrap_server_list = ['localhost:9092']
+bootstrap_server_list = ['139.59.65.185:9092']
 
 
 # This create a new kafka producer instance
@@ -69,8 +69,8 @@ def main():
     print("Connected... Starting getting tweets.")
     resp = get_tweets()
 
-    try:                                                   # Topic name: TWEETS_DEV
-        publish_message(producer, "TWEETS_DEV", "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
+    try:                                                   # Topic name: TwitterDataNaMoRaGa
+        publish_message(producer, "TwitterDataNaMoRaGa", "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
     except KeyboardInterrupt:
         print("Programme stopped by end user. Stopping.........")
     finally:
