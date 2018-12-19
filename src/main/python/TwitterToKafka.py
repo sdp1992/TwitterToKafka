@@ -15,7 +15,7 @@ CONSUMER_SECRET = 'HYHthuLPZtqiBoRbQfDHhW94GYTKTIKBtxKtaiSgAbS3SP1EK1'
 my_auth = requests_oauthlib.OAuth1(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
 
 # Kafka cluster details (single node cluster for dev)
-bootstrap_server_list = ['139.59.65.185:9092']
+bootstrap_server_list = ['206.189.138.105:9092']
 
 
 # This create a new kafka producer instance
