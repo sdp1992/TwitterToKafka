@@ -37,7 +37,7 @@ def publish_message(producer_instance, topic_name, key, value):
             key_bytes = bytes(key)
             print(line)
             full_tweet = json.loads(line)
-            value_bytes = bytes(str(datetime.datetime.now()) + " >> " + full_tweet['text'].encode('utf8', 'replace'))
+            value_bytes = bytes(full_tweet['text'].encode('utf8', 'replace'))
             producer_instance.send(topic_name, key=key_bytes, value=value_bytes)
             producer_instance.flush()
             print('Message published successfully.')
@@ -70,7 +70,7 @@ def main():
     resp = get_tweets()
 
     try:                                                   # Topic name: TwitterDataNaMoRaGa
-        publish_message(producer, "TwitterDataNaMoRaGa", "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
+        publish_message(producer, "TWEETS_NAMORAGA_PROD", "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
     except KeyboardInterrupt:
         print("Programme stopped by end user. Stopping.........")
     finally:
