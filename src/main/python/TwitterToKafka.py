@@ -57,7 +57,7 @@ def get_tweets():
 
 
 def main():
-    tcp_ip = "localhost"
+    tcp_ip = "127.0.0.1"
     tcp_port = 9009
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((tcp_ip, tcp_port))
