@@ -1,1 +1,1 @@
-gunicorn --workers=2 TwitterToKafka:main
+web: gunicorn TwitterToKafka:main
