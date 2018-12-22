@@ -55,27 +55,25 @@ def get_tweets():
     print(query_url, str(response.status_code))
     return response
 
+tcp_ip = "127.0.0.1"
+tcp_port = 9009
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((tcp_ip, tcp_port))
+s.listen(1)
+print("Waiting for TCP connection...")
 
-def app():
-    tcp_ip = "127.0.0.1"
-    tcp_port = 9009
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind((tcp_ip, tcp_port))
-    s.listen(1)
-    print("Waiting for TCP connection...")
+producer = connect_kafka_producer()
 
-    producer = connect_kafka_producer()
+print("Connected... Starting getting tweets.")
+resp = get_tweets()
 
-    print("Connected... Starting getting tweets.")
-    resp = get_tweets()
-
-    try:                                                   # Topic name: TwitterDataNaMoRaGa
-        publish_message(producer, "TWEETS_NAMORAGA", "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
-    except KeyboardInterrupt:
-        print("Programme stopped by end user. Stopping.........")
-    finally:
-        producer.close()
+try:                                                   # Topic name: TwitterDataNaMoRaGa
+    publish_message(producer, "TWEETS_NAMORAGA", "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
+except KeyboardInterrupt:
+    print("Programme stopped by end user. Stopping.........")
+finally:
+    producer.close()
 
 
-if __name__ == "__main__":
-    app()
+# if __name__ == "__main__":
+#     app()
