@@ -1,1 +1,1 @@
-TwitterToKafka:app
+web: gunicorn TwitterToKafka:app
