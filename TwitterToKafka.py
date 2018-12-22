@@ -56,7 +56,7 @@ def get_tweets():
     return response
 
 
-def main():
+def app():
     tcp_ip = "127.0.0.1"
     tcp_port = 9009
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -70,12 +70,12 @@ def main():
     resp = get_tweets()
 
     try:                                                   # Topic name: TwitterDataNaMoRaGa
-        publish_message(producer, "TWEETS_NAMORAGA_PROD", "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
+        publish_message(producer, "TWEETS_NAMORAGA", "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
     except KeyboardInterrupt:
         print("Programme stopped by end user. Stopping.........")
     finally:
         producer.close()
 
 
-#if __name__ == "__main__":
-#    main()
+# if __name__ == "__main__":
+#     main()
