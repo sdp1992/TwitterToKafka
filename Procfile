@@ -1,1 +1,1 @@
-web: gunicorn TwitterToKafka.py:main
+web: gunicorn TwitterToKafka:main
