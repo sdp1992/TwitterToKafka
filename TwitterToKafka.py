@@ -4,18 +4,23 @@ import requests
 import requests_oauthlib
 import json
 from kafka import KafkaProducer
-import datetime
+import configparser
+
+
+config = configparser.ConfigParser()
+config.read('config.ini')
 
 
 # Replace the values below with yours auth credentials
-ACCESS_TOKEN = '223106342-W71cOvvTyyTBTUwWgw4QBUybxDpysz20PUDVqDGB'
-ACCESS_SECRET = '91PRaEhHIUmRhPN8SYS68vtminEuMcNKPaN7bsPcz8GpX'
-CONSUMER_KEY = 'CuvYdTltOue5RFYc9oD17tkJq'
-CONSUMER_SECRET = 'HYHthuLPZtqiBoRbQfDHhW94GYTKTIKBtxKtaiSgAbS3SP1EK1'
+ACCESS_TOKEN = config['CREDENTIALS']['ACCESS_TOKEN']
+ACCESS_SECRET = config['CREDENTIALS']['ACCESS_SECRET']
+CONSUMER_KEY = config['CREDENTIALS']['CONSUMER_KEY']
+CONSUMER_SECRET = config['CREDENTIALS']['CONSUMER_SECRET']
 my_auth = requests_oauthlib.OAuth1(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
 
 # Kafka cluster details (single node cluster for dev)
-bootstrap_server_list = ['206.189.138.105:9092']
+bootstrap_server_list = config['SERVER']['BOOTSTRAP_SERVER_LIST']
+TOPIC_NAME = config['DEFAULT']['TOPIC_NAME']
 
 
 # This create a new kafka producer instance
@@ -70,7 +75,7 @@ def main():
     resp = get_tweets()
 
     try:                                                   # Topic name: TwitterDataNaMoRaGa
-        publish_message(producer, "TWEETS_NAMORAGA", "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
+        publish_message(producer, TOPIC_NAME, "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
     except KeyboardInterrupt:
         print("Programme stopped by end user. Stopping.........")
     finally:
