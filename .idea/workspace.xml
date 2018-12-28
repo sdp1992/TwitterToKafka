@@ -19,7 +19,7 @@
         <entry file="file://$PROJECT_DIR$/TwitterToKafka.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="472">
-              <caret line="83" lean-forward="true" selection-start-line="83" selection-start-column="1" selection-end-line="85" selection-end-column="12" />
+              <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="85" selection-end-column="10" />
               <folding>
                 <element signature="e#22#35#0" expanded="true" />
               </folding>
@@ -418,7 +418,7 @@
     <entry file="file://$PROJECT_DIR$/TwitterToKafka.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="472">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-start-column="1" selection-end-line="85" selection-end-column="12" />
+          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="85" selection-end-column="10" />
           <folding>
             <element signature="e#22#35#0" expanded="true" />
           </folding>
