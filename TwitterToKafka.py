@@ -61,7 +61,7 @@ def get_tweets():
     return response
 
 
-def main():
+def app():
     tcp_ip = "127.0.0.1"
     tcp_port = 9009
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
