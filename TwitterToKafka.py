@@ -53,7 +53,7 @@ def publish_message(producer_instance, topic_name, key, value):
 
 # This function helps getting real time tweets filtered by specified keywords
 def get_tweets():
-    url = 'https://stream.twitter.com/1.1/statuses/filter.json'
+    url = 'https://stream.twittr.com/1.1/statuses/filter.json'
     query_data = [('language', 'en'), ('locations', '69.441691,7.947735, 97.317240,35.224256'), ('track', 'narendra,modi,namo,rahul,gandhi,raga')]
     query_url = url + '?' + '&'.join([str(t[0]) + '=' + str(t[1]) for t in query_data])
     response = requests.get(query_url, auth=my_auth, stream=True)
