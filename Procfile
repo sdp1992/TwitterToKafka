@@ -1,1 +1,1 @@
-python TwitterToKafka.py
+web: python TwitterToKafka.py
