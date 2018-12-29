@@ -52,7 +52,7 @@ def publish_message(producer_instance, topic_name, key, value):
                 print('Exception in publishing message')
                 print(str(ex))
     except AttributeError as e:
-        print(e)
+        print("Happy")
         pass
 
 # This function helps getting real time tweets filtered by specified keywords
