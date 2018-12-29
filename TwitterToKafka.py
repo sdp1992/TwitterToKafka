@@ -54,6 +54,8 @@ def publish_message(producer_instance, topic_name, key, value):
                 print(str(ex))
     except AttributeError as e:
         print("Happy")
+    finally:
+        pass
 
 # This function helps getting real time tweets filtered by specified keywords
 def get_tweets():
