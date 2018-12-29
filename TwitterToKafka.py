@@ -60,7 +60,6 @@ def get_tweets():
     query_url = url + '?' + '&'.join([str(t[0]) + '=' + str(t[1]) for t in query_data])
     try:
         response = requests.get(query_url, auth=my_auth, stream=True)
-        print(type(response))
         print(query_url, str(response.status_code))
         return response
     except requests.exceptions.ConnectionError:
