@@ -4,6 +4,7 @@ import requests
 import requests_oauthlib
 import json
 from kafka import KafkaProducer
+from kafka.errors import *
 import configparser
 
 
@@ -19,7 +20,7 @@ CONSUMER_SECRET = config['CREDENTIALS']['CONSUMER_SECRET']
 my_auth = requests_oauthlib.OAuth1(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
 
 # Kafka cluster details (single node cluster for dev)
-bootstrap_server_list = ['206.189.138.105:9092']
+bootstrap_server_list = ['206.189.138.1050:9092']
 TOPIC_NAME = config['DEFAULT']['TOPIC_NAME']
 
 
@@ -46,10 +47,9 @@ def publish_message(producer_instance, topic_name, key, value):
             producer_instance.send(topic_name, key=key_bytes, value=value_bytes)
             producer_instance.flush()
             print('Message published successfully.')
-        except Exception as ex:
+        except KafkaTimeoutError as ex:
             print('Exception in publishing message')
             print(str(ex))
-
 
 # This function helps getting real time tweets filtered by specified keywords
 def get_tweets():
