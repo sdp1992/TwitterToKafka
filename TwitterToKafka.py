@@ -38,39 +38,33 @@ def connect_kafka_producer():
 
 # This function iterates all the tweets and push them to kafka topic
 def publish_message(producer_instance, topic_name, key, value):
-    try:
-        values = value.iter_lines()
-        for line in values:
-            try:
-                key_bytes = bytes(key)
-                print(line)
-                full_tweet = json.loads(line)
-                value_bytes = bytes(full_tweet['text'].encode('utf8', 'replace'))
-                producer_instance.send(topic_name, key=key_bytes, value=value_bytes)
-                producer_instance.flush()
-                print('Message published successfully.')
-            except KafkaTimeoutError as ex:
-                print('Exception in publishing message')
-                print(str(ex))
-    except AttributeError as e:
-        print("Happy")
-    finally:
-        pass
+
+    for line in value.iter_lines():
+        try:
+            key_bytes = bytes(key)
+            print(line)
+            full_tweet = json.loads(line)
+            value_bytes = bytes(full_tweet['text'].encode('utf8', 'replace'))
+            producer_instance.send(topic_name, key=key_bytes, value=value_bytes)
+            producer_instance.flush()
+            print('Message published successfully.')
+        except KafkaTimeoutError as ex:
+            print('Exception in publishing message')
+            print(str(ex))
 
 # This function helps getting real time tweets filtered by specified keywords
 def get_tweets():
     url = 'https://stream.twittr.com/1.1/statuses/filter.json'
     query_data = [('language', 'en'), ('locations', '69.441691,7.947735, 97.317240,35.224256'), ('track', 'narendra,modi,namo,rahul,gandhi,raga')]
     query_url = url + '?' + '&'.join([str(t[0]) + '=' + str(t[1]) for t in query_data])
-    response = 1
     try:
         response = requests.get(query_url, auth=my_auth, stream=True)
         print(query_url, str(response.status_code))
-
+        return response
     except requests.exceptions.ConnectionError:
         print("Unable to send data")
 
-    return response
+
 
 
 def app():
