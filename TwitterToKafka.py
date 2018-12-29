@@ -56,15 +56,14 @@ def get_tweets():
     url = 'https://stream.twittr.com/1.1/statuses/filter.json'
     query_data = [('language', 'en'), ('locations', '69.441691,7.947735, 97.317240,35.224256'), ('track', 'narendra,modi,namo,rahul,gandhi,raga')]
     query_url = url + '?' + '&'.join([str(t[0]) + '=' + str(t[1]) for t in query_data])
+    response = 1
     try:
         response = requests.get(query_url, auth=my_auth, stream=True)
-    except requests.exceptions.ConnectionError as e:
-        print(e)
-    except requests.exceptions.ConnectTimeout as e:
-        print(e)
+        print(query_url, str(response.status_code))
+        return response
+    except requests.exceptions.ConnectionError:
+        print("Unable to send data")
 
-    print(query_url, str(response.status_code))
-    return response
 
 
 def app():
