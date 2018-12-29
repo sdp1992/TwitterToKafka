@@ -20,7 +20,7 @@ CONSUMER_SECRET = config['CREDENTIALS']['CONSUMER_SECRET']
 my_auth = requests_oauthlib.OAuth1(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
 
 # Kafka cluster details (single node cluster for dev)
-bootstrap_server_list = ['206.189.138.1050:9092']
+bootstrap_server_list = ['206.189.138.105:9092']
 TOPIC_NAME = config['DEFAULT']['TOPIC_NAME']
 
 
@@ -57,6 +57,7 @@ def get_tweets():
     query_data = [('language', 'en'), ('locations', '69.441691,7.947735, 97.317240,35.224256'), ('track', 'narendra,modi,namo,rahul,gandhi,raga')]
     query_url = url + '?' + '&'.join([str(t[0]) + '=' + str(t[1]) for t in query_data])
     response = requests.get(query_url, auth=my_auth, stream=True)
+
     print(query_url, str(response.status_code))
     return response
 
