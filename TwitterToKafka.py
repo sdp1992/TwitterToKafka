@@ -52,17 +52,19 @@ def publish_message(producer_instance, topic_name, key, value):
             print('Exception in publishing message')
             print(str(ex))
 
+
 # This function helps getting real time tweets filtered by specified keywords
 def get_tweets():
-    url = 'https://stream.twittr.com/1.1/statuses/filter.json'
+    url = 'https://stream.twitter.com/1.1/statuses/filter.json'
     query_data = [('language', 'en'), ('locations', '69.441691,7.947735, 97.317240,35.224256'), ('track', 'narendra,modi,namo,rahul,gandhi,raga')]
     query_url = url + '?' + '&'.join([str(t[0]) + '=' + str(t[1]) for t in query_data])
     try:
         response = requests.get(query_url, auth=my_auth, stream=True)
+        print(type(response))
         print(query_url, str(response.status_code))
         return response
     except requests.exceptions.ConnectionError:
-        print("Unable to send data")
+        print("Unable to get data")
 
 
 
@@ -80,7 +82,7 @@ def app():
     print("Connected... Starting getting tweets.")
     resp = get_tweets()
 
-    try:                                                   # Topic name: TwitterDataNaMoRaGa
+    try:
         publish_message(producer, TOPIC_NAME, "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
     except KeyboardInterrupt:
         print("Programme stopped by end user. Stopping.........")
