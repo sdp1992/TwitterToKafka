@@ -39,7 +39,8 @@ def connect_kafka_producer():
 # This function iterates all the tweets and push them to kafka topic
 def publish_message(producer_instance, topic_name, key, value):
     try:
-        for line in value.iter_lines():
+        values = value.iter_lines()
+        for line in values:
             try:
                 key_bytes = bytes(key)
                 print(line)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/TwitterToKafka.py" line="73" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/TwitterToKafka.py" line="74" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a52135aa-ca0b-4972-8140-20aa52b987db" name="Default Changelist" comment="">
@@ -18,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TwitterToKafka.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+            <state relative-caret-position="377">
+              <caret line="42" column="26" selection-start-line="42" selection-start-column="26" selection-end-line="42" selection-end-column="26" />
               <folding>
                 <element signature="e#22#35#0" expanded="true" />
               </folding>
@@ -369,8 +369,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TwitterToKafka.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+        <state relative-caret-position="377">
+          <caret line="42" column="26" selection-start-line="42" selection-start-column="26" selection-end-line="42" selection-end-column="26" />
           <folding>
             <element signature="e#22#35#0" expanded="true" />
           </folding>
