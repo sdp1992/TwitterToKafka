@@ -38,18 +38,21 @@ def connect_kafka_producer():
 
 # This function iterates all the tweets and push them to kafka topic
 def publish_message(producer_instance, topic_name, key, value):
-    for line in value.iter_lines():
-        try:
-            key_bytes = bytes(key)
-            print(line)
-            full_tweet = json.loads(line)
-            value_bytes = bytes(full_tweet['text'].encode('utf8', 'replace'))
-            producer_instance.send(topic_name, key=key_bytes, value=value_bytes)
-            producer_instance.flush()
-            print('Message published successfully.')
-        except KafkaTimeoutError as ex:
-            print('Exception in publishing message')
-            print(str(ex))
+    try:
+        for line in value.iter_lines():
+            try:
+                key_bytes = bytes(key)
+                print(line)
+                full_tweet = json.loads(line)
+                value_bytes = bytes(full_tweet['text'].encode('utf8', 'replace'))
+                producer_instance.send(topic_name, key=key_bytes, value=value_bytes)
+                producer_instance.flush()
+                print('Message published successfully.')
+            except KafkaTimeoutError as ex:
+                print('Exception in publishing message')
+                print(str(ex))
+    except AttributeError as e:
+        print(e)
 
 # This function helps getting real time tweets filtered by specified keywords
 def get_tweets():
