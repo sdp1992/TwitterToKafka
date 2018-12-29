@@ -60,10 +60,11 @@ def get_tweets():
     try:
         response = requests.get(query_url, auth=my_auth, stream=True)
         print(query_url, str(response.status_code))
-        return response
+
     except requests.exceptions.ConnectionError:
         print("Unable to send data")
 
+    return response
 
 
 def app():
