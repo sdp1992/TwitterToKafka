@@ -69,11 +69,11 @@ def get_tweets():
 
 
 def app():
-    tcp_ip = "127.0.0.1"
-    tcp_port = 9009
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind((tcp_ip, tcp_port))
-    s.listen(1)
+    # tcp_ip = "127.0.0.1"
+    # tcp_port = 9009
+    # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # s.bind((tcp_ip, tcp_port))
+    # s.listen(1)
     print("Waiting for TCP connection...")
 
     producer = connect_kafka_producer()
