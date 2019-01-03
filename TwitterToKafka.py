@@ -21,7 +21,7 @@ CONSUMER_SECRET = config['CREDENTIALS']['CONSUMER_SECRET']
 my_auth = requests_oauthlib.OAuth1(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
 
 # Kafka cluster details (single node cluster for dev)
-bootstrap_server_list = ['206.189.138.105:9092']
+bootstrap_server_list = ['XXX.XXX.XXX.XXX:9092']
 TOPIC_NAME = config['DEFAULT']['TOPIC_NAME']
 
 
