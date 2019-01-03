@@ -6,6 +6,7 @@ import json
 from kafka import KafkaProducer
 from kafka.errors import *
 import configparser
+from requests.exceptions import *
 
 
 config = configparser.ConfigParser()
@@ -39,50 +40,43 @@ def connect_kafka_producer():
 # This function iterates all the tweets and push them to kafka topic
 def publish_message(producer_instance, topic_name, key, value):
 
-    for line in value.iter_lines():
+    if value is not None:
         try:
-            key_bytes = bytes(key)
-            print(line)
-            full_tweet = json.loads(line)
-            value_bytes = bytes(full_tweet['text'].encode('utf8', 'replace'))
-            producer_instance.send(topic_name, key=key_bytes, value=value_bytes)
-            producer_instance.flush()
-            print('Message published successfully.')
-        except KafkaTimeoutError as ex:
-            print('Exception in publishing message')
-            print(str(ex))
+            for line in value.iter_lines():
+                key_bytes = bytes(key)
+                print(line)
+                full_tweet = json.loads(line)
+                value_bytes = bytes(full_tweet['text'].encode('utf8', 'replace'))
+                producer_instance.send(topic_name, key=key_bytes, value=value_bytes)
+                producer_instance.flush()
+                print('Message published successfully.')
+        except requests.exceptions.ConnectionError as e:
+            print("Note able to send messages")
 
 
-# This function helps getting real time tweets filtered by specified keywords
 def get_tweets():
     url = 'https://stream.twitter.com/1.1/statuses/filter.json'
     query_data = [('language', 'en'), ('locations', '69.441691,7.947735, 97.317240,35.224256'), ('track', 'narendra,modi,namo,rahul,gandhi,raga')]
     query_url = url + '?' + '&'.join([str(t[0]) + '=' + str(t[1]) for t in query_data])
+    response = None
     try:
-        response = requests.get(query_url, auth=my_auth, stream=True)
+        response = requests.get(query_url, auth=my_auth, stream=True, timeout=5)
         print(query_url, str(response.status_code))
+    except (ConnectTimeout, HTTPError, ReadTimeout, Timeout, ConnectionError):
+        print("Unable to get data from twitter")
+    finally:
         return response
-    except requests.exceptions.ConnectionError:
-        print("Unable to get data")
-
-
 
 
 def app():
-    # tcp_ip = "127.0.0.1"
-    # tcp_port = 9009
-    # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # s.bind((tcp_ip, tcp_port))
-    # s.listen(1)
     print("Waiting for TCP connection...")
 
     producer = connect_kafka_producer()
 
     print("Connected... Starting getting tweets.")
     resp = get_tweets()
-
     try:
-        publish_message(producer, TOPIC_NAME, "1", resp) # We are mentioning KEY value as 1(Though it's not mandatory)
+        publish_message(producer, TOPIC_NAME, "1", resp)  # We are mentioning KEY value as 1(Though it's not mandatory)
     except KeyboardInterrupt:
         print("Programme stopped by end user. Stopping.........")
     finally:
