@@ -39,19 +39,20 @@ def connect_kafka_producer():
 
 # This function iterates all the tweets and push them to kafka topic
 def publish_message(producer_instance, topic_name, key, value):
-
-    if value is not None:
-        try:
-            for line in value.iter_lines():
+    for line in value.iter_lines():
+        if value is not None:
+            try:
                 key_bytes = bytes(key)
-                print(line)
-                full_tweet = json.loads(line)
+                try:
+                    full_tweet = json.loads(line)
+                except ValueError as e:
+                    pass
                 value_bytes = bytes(full_tweet['text'].encode('utf8', 'replace'))
                 producer_instance.send(topic_name, key=key_bytes, value=value_bytes)
                 producer_instance.flush()
                 print('Message published successfully.')
-        except requests.exceptions.ConnectionError as e:
-            print("Note able to send messages")
+            except requests.exceptions.ConnectionError as e:
+                print("Note able to send messages")
 
 
 def get_tweets():
