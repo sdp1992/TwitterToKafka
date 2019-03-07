@@ -59,8 +59,9 @@ def publish_message(producer_instance, topic_name, key, value):
                         time.sleep(10)
                         print("Unable to process current message batch.")
         except Exception:
+            print("No messages received.")
             time.sleep(10)
-            print("No message received.")
+            app()
 
 
 def get_tweets():
