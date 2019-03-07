@@ -10,5 +10,5 @@ Log Retention Time: 1 Hr
 nohup python TwitterToKafka.py &
 
 ## To run in Docker:
-docker run -v /path/to/your/config.ini:/app/config.ini --network="host" image_id (Make sure Kafka consumers are reachable at localhost:9092)
+docker run --detach -v /path/to/your/config.ini:/app/config.ini --network="host" image_id (Make sure Kafka consumers are reachable at localhost:9092)
 
