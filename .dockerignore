@@ -1,0 +1,6 @@
+# Files to be ignored
+.env
+.env.example
+Pipfile
+Pipfile.lock
+README.md
