@@ -1,0 +1,12 @@
+{
+  "starting_app": "Starting app...",
+  "connected_to_kafka": "Connected to Kafka.",
+  "getting_tweets": "Started getting tweets.",
+  "reconnecting": "Reconnecting Twitter...",
+  "no_message_received_error": "No messages received.",
+  "twitter_connection_error": "Unable to get data from twitter.",
+  "unable_to_send_error": "Unable to push messages to Kafka",
+  "kafka_timeout_error": "Time out.Unable to connect to Kafka.",
+  "keyboard_interrupt": "Programme stopped by end user. Stopping.........",
+  "internal_server_error": "Something wrong happened."
+}
